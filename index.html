@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cardboro</title>
+
+    <script crossorigin src='https://unpkg.com/react@17/umd/react.development.js'></script>
+    <script crossorigin src='https://unpkg.com/react-dom@17/umd/react-dom.development.js'></script>
+    <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+</head>
+<body>
+    <div id='Card'></div>
+    <script type='text/babel'>
+                let typeOfWeather = {
+                    'Ветренно':'icons/wind.ico',
+                    'Осадки':'icons/rain.ico',
+                    'Солнечно с осадками':'icons/sunrain.ico',
+                    'Облачно':'icons/cloud.ico'
+                }
+                let dayTime = {
+                    'Солнечно с осадками Утро':'url("img/utro.jpg")',
+                    'Осадки День':'url("img/den.jpg")',
+                    'Облачно Вечер':'url("img/vecher.jpg")',
+                    'Ветренно Ночь':'url("img/noch.png")'
+                }
+
+        class Weather extends React.Component{
+            render() {
+                let cardStyle = {
+                    'margin':'1rem',
+                    'borderRadius':'15px',
+                    'width':'200px',
+                    'height':'400px',
+                    'backgroundImage':`${dayTime[this.props.typeOfWeather + ' ' + this.props.name]}`,
+                    'backgroundSize':'cover',
+                    'display':'inline',
+                    'aligItems':'center',
+                    'float':'left',
+                    'textAlign':'center',
+
+
+                }
+                let fontStyle = {
+                    'marginTop':'30px',
+                    'fontSize':'20px',
+                    'color':'#black',
+                }
+                return(
+                    <div style={cardStyle}>
+                        <div style={fontStyle}>
+                            <div>{this.props.celcium} °C 
+                            </div>
+                        </div>
+                        <div style={fontStyle} >
+                            <img width='25px' src={typeOfWeather[this.props.typeOfWeather]} />
+                            <div/>{this.props.typeOfWeather}
+                        </div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <div>
+                <Weather name='Утро' celcium='20' typeOfWeather='Солнечно с осадками'
+                />
+                <Weather name='День' celcium='10' typeOfWeather='Осадки'
+                />
+                <Weather name='Вечер' celcium='5' typeOfWeather='Облачно'
+                />
+                <Weather name='Ночь' celcium='30' typeOfWeather='Ветренно'
+                />
+            </div>,
+            document.getElementById('Card')
+            )
+    </script>
+</body>
+</html>
